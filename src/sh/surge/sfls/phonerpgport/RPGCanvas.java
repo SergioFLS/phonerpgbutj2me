@@ -22,6 +22,7 @@ public class RPGCanvas extends GameCanvas implements Runnable {
 	public RPGCanvas() throws IOException {
 		super(false);
 		
+		setFullScreenMode(true);
 		tileset = Image.createImage("/assets/tilesets/bedroom.png");
 		mainCharacter = Image.createImage("/assets/mainchar.png");
 		
