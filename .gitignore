@@ -1,0 +1,10 @@
+bin/
+classes/
+res/assets
+tmplib/
+tmpclasses/
+
+*.jar
+*.jad
+*.class
+Thumbs.db
