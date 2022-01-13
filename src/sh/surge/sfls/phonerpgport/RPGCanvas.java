@@ -8,6 +8,16 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 public class RPGCanvas extends GameCanvas implements Runnable {
+	private byte[][] tempMap = {
+		{0,0,3,0,2,0,3,0,0},
+		{1,1,1,1,1,1,1,1,1},
+		{5,4,4,4,4,4,10,11,10},
+		{6,4,4,4,4,4,4,4,4},
+		{4,4,4,4,4,4,7,8,9},
+		{12,13,14,4,4,4,4,4,4},
+		{4,4,4,4,4,4,4,4,4}
+	};
+	
 	boolean upKey = false;
 	boolean downKey = false;
 	boolean rightKey = false;
@@ -15,6 +25,7 @@ public class RPGCanvas extends GameCanvas implements Runnable {
 	int characterX = 5;
 	int characterY = 5;
 	Image tileset;
+	Image tilesetExcess;
 	Image mainCharacter;
 	
 	MapRenderer mapRenderer = new MapRenderer();
@@ -24,6 +35,7 @@ public class RPGCanvas extends GameCanvas implements Runnable {
 		
 		setFullScreenMode(true);
 		tileset = Image.createImage("/assets/tilesets/bedroom.png");
+		tilesetExcess = Image.createImage("/assets/tilesets/bedroom_excess.png");
 		mainCharacter = Image.createImage("/assets/mainchar.png");
 		
 		new Thread(this).start();
@@ -44,16 +56,17 @@ public class RPGCanvas extends GameCanvas implements Runnable {
 	}
 	
 	public void paint(Graphics g) {
-		if (upKey) characterY-=2;
-		if (downKey) characterY+=2;
-		if (leftKey) characterX-=2;
-		if (rightKey) characterX+=2;
-		characterX%=240;
+		if (upKey) characterY--;
+		if (downKey) characterY++;
+		if (leftKey) characterX--;
+		if (rightKey) characterX++;
 		
 		g.setColor(0x000042);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		mapRenderer.drawMap(g, tileset);
+		mapRenderer.drawMap(g, tileset, tempMap);
 		g.drawImage(mainCharacter, characterX, characterY, 0);
+		mapRenderer.drawExcessTiles(g, tilesetExcess, tempMap);
+		
 	}
 	
 	public void run() {
