@@ -4,6 +4,6 @@ This is an attempt to port an in-development video game about collecting mobile 
 
 ## License
 
-Code: TBD (it's going to be OSI approved)
+Code: Dual-licensed MIT-0 and 0BSD
 
 Assets: Copyrighted from JSR Games, used without permission (currently gitignored)
